@@ -24,7 +24,7 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignHCenter
         }
 
-        Button {
+                Button {
             text: "Increase Temperature"
             Layout.alignment: Qt.AlignHCenter
 
@@ -32,5 +32,23 @@ ApplicationWindow {
                 temperatureSensor.temperature += 1
             }
         }
+
+
+        Button {
+            text: "Decrease Temperature"
+            Layout.alignment: Qt.AlignHCenter
+
+            onClicked: {
+                temperatureSensor.temperature -= 1
+            }
+        }
+
+        Text {
+            text: "WARNING: Temperature too high!"
+            visible: temperatureSensor.temperature >= 75
+            font.pixelSize: 20
+            Layout.alignment: Qt.AlignHCenter
+        }
+
     }
 }

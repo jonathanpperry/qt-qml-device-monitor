@@ -20,7 +20,9 @@ qt-qml-device-monitor/
 ├── CMakeLists.txt
 ├── README.md
 ├── src/
-│   └── main.cpp
+│   ├── main.cpp
+│   ├── TemperatureSensor.cpp
+│   └── TemperatureSensor.h
 └── qml/
     └── Main.qml
 ```
@@ -30,18 +32,61 @@ qt-qml-device-monitor/
 * C++17-compatible compiler
 * CMake
 * Qt 6 with Qt Quick support
+* Ninja or another supported CMake build system
 
 ## Build
 
-```bash
-cmake -S . -B build
+Configure the project:
+
+```powershell
+qt-cmake.bat -G Ninja `
+  -DCMAKE_CXX_COMPILER="C:\Qt\Tools\mingw1310_64\bin\g++.exe" `
+  -S . `
+  -B build
+```
+
+Build the application:
+
+```powershell
 cmake --build build
 ```
 
-Depending on the Qt installation, CMake may need to be provided with the location of Qt.
+On Windows, deploy the required Qt runtime dependencies:
 
-## Current Goal
+```powershell
+windeployqt.exe --qmldir .\qml .\build\QtQmlDeviceMonitor.exe
+```
 
-Launch a minimal Qt Quick application with a QML-defined desktop interface.
+Run the application:
 
-Future development will add a C++ device/sensor model and connect backend state to the QML user interface.
+```powershell
+.\build\QtQmlDeviceMonitor.exe
+```
+
+The exact Qt and compiler paths may vary depending on the local Qt installation.
+
+## Current State
+
+The application currently includes:
+
+* A Qt Quick/QML desktop interface
+* A C++ `TemperatureSensor` backend
+* A temperature property exposed from C++ to QML
+* Reactive UI updates when the temperature changes
+* A control for increasing the simulated temperature
+* An overheating warning displayed at 75°F or higher
+
+## Development Workflow
+
+After the project has been configured and the Qt runtime dependencies have been deployed once, the normal edit-test cycle is:
+
+```powershell
+cmake --build build
+.\build\QtQmlDeviceMonitor.exe
+```
+
+Run `windeployqt` again when deployment dependencies need to be refreshed:
+
+```powershell
+windeployqt.exe --qmldir .\qml .\build\QtQmlDeviceMonitor.exe
+```
