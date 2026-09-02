@@ -12,43 +12,43 @@ ApplicationWindow {
         anchors.centerIn: parent
         spacing: 20
 
-        Text {
+        Label {
             text: "Qt/QML Device Monitor"
             font.pixelSize: 28
             Layout.alignment: Qt.AlignHCenter
         }
 
-        Text {
+        Label {
             text: "Temperature: " + temperatureSensor.temperature + "°F"
             font.pixelSize: 22
             Layout.alignment: Qt.AlignHCenter
         }
 
-                Button {
+        Button {
             text: "Increase Temperature"
             Layout.alignment: Qt.AlignHCenter
 
             onClicked: {
-                temperatureSensor.temperature += 1
+                temperatureSensor.temperature += 1;
             }
         }
-
 
         Button {
             text: "Decrease Temperature"
             Layout.alignment: Qt.AlignHCenter
 
             onClicked: {
-                temperatureSensor.temperature -= 1
+                temperatureSensor.temperature -= 1;
             }
         }
 
-        Text {
+        Label {
             text: "WARNING: Temperature too high!"
             visible: temperatureSensor.temperature >= 75
             font.pixelSize: 20
+            font.bold: true
+            color: "red"
             Layout.alignment: Qt.AlignHCenter
         }
-
     }
 }
