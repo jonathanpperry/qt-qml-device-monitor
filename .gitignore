@@ -1,0 +1,28 @@
+# Build / deployment output
+build/
+dist/
+deploy/
+cmake-build-*/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Compiled artifacts
+*.obj
+*.exe
+*.pdb
+*.ilk
+
+# Visual Studio
+.vs/
+
+# Qt Creator
+*.user
+*.user.*
+
+# OS
+.DS_Store
+Thumbs.db
