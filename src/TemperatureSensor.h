@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QObject>
-
+#include <QTimer>
 class TemperatureSensor : public QObject
 {
     Q_OBJECT
@@ -27,4 +27,5 @@ signals:
 
 private:
     double m_temperature;
+    QTimer m_updateTimer;
 };

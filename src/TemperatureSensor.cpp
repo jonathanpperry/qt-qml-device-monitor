@@ -6,6 +6,17 @@ TemperatureSensor::TemperatureSensor(
     : QObject(parent),
       m_temperature(temperature)
 {
+    connect(
+        &m_updateTimer,
+        &QTimer::timeout,
+        this,
+        [this]()
+        {
+            setTemperature(m_temperature + 0.5);
+        }
+    );
+
+    m_updateTimer.start(1000);
 }
 
 double TemperatureSensor::temperature() const
