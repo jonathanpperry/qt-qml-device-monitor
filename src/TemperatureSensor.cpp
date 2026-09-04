@@ -2,8 +2,7 @@
 
 TemperatureSensor::TemperatureSensor(
     double temperature,
-    QObject *parent
-)
+    QObject *parent)
     : QObject(parent),
       m_temperature(temperature)
 {
