@@ -42,6 +42,26 @@ ApplicationWindow {
             }
         }
 
+        Button {
+            text: "Start Monitoring"
+            visible: !temperatureSensor.running
+            Layout.alignment: Qt.AlignHCenter
+            onClicked: {
+                if (!temperatureSensor.running) {
+                    temperatureSensor.start();
+                }
+            }
+        }
+
+        Button {
+            text: "Stop Monitoring"
+            visible: temperatureSensor.running
+            Layout.alignment: Qt.AlignHCenter
+            onClicked: {
+                temperatureSensor.stop();
+            }
+        }
+
         Label {
             text: "WARNING: Temperature too high!"
             visible: temperatureSensor.temperature >= 75

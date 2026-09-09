@@ -13,8 +13,7 @@ TemperatureSensor::TemperatureSensor(
         [this]()
         {
             setTemperature(m_temperature + 0.5);
-        }
-    );
+        });
 
     m_updateTimer.start(1000);
 }
@@ -34,4 +33,23 @@ void TemperatureSensor::setTemperature(double temperature)
     m_temperature = temperature;
 
     emit temperatureChanged(m_temperature);
+}
+
+bool TemperatureSensor::isRunning() const
+{
+    return m_updateTimer.isActive();
+}
+
+void TemperatureSensor::start()
+{
+    // Start the timer and notify QML.
+    m_updateTimer.start();
+    emit runningChanged(true);
+}
+
+void TemperatureSensor::stop()
+{
+    // Stop the timer and notify QML.
+    m_updateTimer.stop();
+    emit runningChanged(false);
 }

@@ -10,10 +10,17 @@ class TemperatureSensor : public QObject
         double temperature
         READ temperature
         WRITE setTemperature
-        NOTIFY temperatureChanged
-    )
+        NOTIFY temperatureChanged)
+
+    Q_PROPERTY(
+        bool running
+        READ isRunning
+        NOTIFY runningChanged)
 
 public:
+    Q_INVOKABLE void start();
+    Q_INVOKABLE void stop();
+
     explicit TemperatureSensor(
         double temperature = 72.0,
         QObject *parent = nullptr
@@ -21,9 +28,11 @@ public:
 
     double temperature() const;
     void setTemperature(double temperature);
+    bool isRunning() const;
 
-signals:
-    void temperatureChanged(double temperature);
+    signals:
+        void temperatureChanged(double temperature);
+        void runningChanged(bool running);
 
 private:
     double m_temperature;
