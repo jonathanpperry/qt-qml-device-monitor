@@ -3,6 +3,10 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 ApplicationWindow {
+    id: root
+
+    required property TemperatureSensor temperatureSensor
+
     width: 640
     height: 480
     visible: true
@@ -19,7 +23,7 @@ ApplicationWindow {
         }
 
         Label {
-            text: "Temperature: " + temperatureSensor.temperature + "°F"
+            text: "Temperature: " + root.temperatureSensor.temperature + "°F"
             font.pixelSize: 22
             Layout.alignment: Qt.AlignHCenter
         }
@@ -29,7 +33,7 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignHCenter
 
             onClicked: {
-                temperatureSensor.temperature += 1;
+                root.temperatureSensor.temperature += 1;
             }
         }
 
@@ -38,33 +42,33 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignHCenter
 
             onClicked: {
-                temperatureSensor.temperature -= 1;
+                root.temperatureSensor.temperature -= 1;
             }
         }
 
         Button {
             text: "Start Monitoring"
-            visible: !temperatureSensor.running
+            visible: !root.temperatureSensor.running
             Layout.alignment: Qt.AlignHCenter
             onClicked: {
-                if (!temperatureSensor.running) {
-                    temperatureSensor.start();
+                if (!root.temperatureSensor.running) {
+                    root.temperatureSensor.start();
                 }
             }
         }
 
         Button {
             text: "Stop Monitoring"
-            visible: temperatureSensor.running
+            visible: root.temperatureSensor.running
             Layout.alignment: Qt.AlignHCenter
             onClicked: {
-                temperatureSensor.stop();
+                root.temperatureSensor.stop();
             }
         }
 
         Label {
             text: "WARNING: Temperature too high!"
-            visible: temperatureSensor.temperature >= 75
+            visible: root.temperatureSensor.temperature >= 75
             font.pixelSize: 20
             font.bold: true
             color: "red"

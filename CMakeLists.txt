@@ -13,13 +13,21 @@ qt_standard_project_setup(REQUIRES 6.8)
 
 qt_add_executable(QtQmlDeviceMonitor
     src/main.cpp
-    src/TemperatureSensor.cpp
-    src/TemperatureSensor.h
 )
+
 qt_add_qml_module(QtQmlDeviceMonitor
     URI DeviceMonitor
+
     QML_FILES
         qml/Main.qml
+    
+    SOURCES
+        src/TemperatureSensor.cpp
+        src/TemperatureSensor.h
+)
+
+target_include_directories(QtQmlDeviceMonitor
+    PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
 target_link_libraries(QtQmlDeviceMonitor

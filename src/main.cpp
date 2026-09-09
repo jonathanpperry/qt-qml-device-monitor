@@ -1,6 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQmlContext>
+#include <QVariant>
 
 #include "TemperatureSensor.h"
 
@@ -12,10 +12,9 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    engine.rootContext()->setContextProperty(
-        "temperatureSensor",
-        &sensor
-    );
+    engine.setInitialProperties({
+        { "temperatureSensor", QVariant::fromValue(&sensor) }
+    });
 
     engine.loadFromModule("DeviceMonitor", "Main");
 
